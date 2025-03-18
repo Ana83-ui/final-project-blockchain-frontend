@@ -1,33 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Provider} from "react-redux"
+import store from "./core/redux/store/store"
+import HomeLayout from "../layout/HomeLayout";
+import { BrowserRouter, Route, Routes } from "react-router";
+import HomePage from "./pages/HomePage/HomePage"
+import LoginPage from './pages/LoginPage/LoginPage';
+import MyProfileComponent from './components/MyProfile/MyProfileComponent'
+import TransactionDetailComponent from './components/Transactions/TransactionDetailComponent';
+import MyDetailComponent from './components/MyDetail/MyDetailComponent';
+import NewTransactionComponent from './components/Transactions/NewTransactionComponent';
+import ChangePasswordComponent from './components/Password/ChangePasswordComponent';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+ 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Provider store={store}>
+      <BrowserRouter>
+          <HomeLayout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/profile" element={<MyProfileComponent />} />
+              <Route path="/details" element={<MyDetailComponent />} />
+              <Route path="/transaction" element={<TransactionDetailComponent />} />
+              <Route path="/transactions" element={<NewTransactionComponent />} />
+              <Route path="/password" element={<ChangePasswordComponent/>} />
+            </Routes>
+          </HomeLayout>
+        </BrowserRouter>
+      </Provider>
     </>
   )
 }

@@ -7,12 +7,12 @@ import myDetailComponentReducer from "../../../components/MyDetail/MyDetailCompo
 import newTransactionComponentReducer from "../../../components/Transactions/NewTransactionComponentReducer";
 
 const reducers = combineReducers({
-myProfileComponentReducer,
-loginPageReducer,
-transactionPageReducer,
-// transactionDetailComponentReducer,
-myDetailComponentReducer,
-newTransactionComponentReducer
-})
+  myProfileComponentReducer,
+  loginPageReducer,
+  transactionPageReducer,
+  // transactionDetailComponentReducer,
+  myDetailComponentReducer,
+  newTransactionComponentReducer,
+});
 
-export default reducers
+export default reducers;

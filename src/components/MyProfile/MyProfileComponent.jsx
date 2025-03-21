@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { detailUser } from "./MyProfileComponentAction";
 import TransactionPage from "../../pages/TransactionPage/TransactionPage";
 
+
 const MyProfileComponent = () => {
   const userDetail = useSelector(
     (state) => state.myProfileComponentReducer.userDetail
@@ -13,7 +14,7 @@ const MyProfileComponent = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user")); 
+    const user = JSON.parse(localStorage.getItem("user"));
 
     if (token && user) {
       dispatch(detailUser(user));
@@ -22,8 +23,15 @@ const MyProfileComponent = () => {
     }
   }, [dispatch]);
 
+  useEffect(() => {
+    // Cuando userDetail cambie, podría ser un buen lugar para mostrar los cambios
+    console.log("userDetail has been updated:", userDetail);
+  }, [userDetail]); // Este useEffect se ejecutará cada vez que se actualicen los detalles del usuario
+
+
+
   const goToDetailUser = () => {
-    navigate("/details",);
+    navigate("/details");
   };
 
   const goToNewTransaction = () => {
@@ -32,32 +40,46 @@ const MyProfileComponent = () => {
 
   return (
     <div>
-      <hr />
       {userDetail ? (
         <div>
-          <div>
-            {/* <MyProfileComponent /> */}
-          <form id="upload-form" encType="multipart/form-data">
-  <input type="file" name="photo" id="photo" accept="image/*" />
-  <button type="submit">Upload Photo</button>
-</form>
+          <div className="welcome-profile">
+            <div className="photo">
+              {userDetail.photo ? (
+                <img
+                  src={`http://localhost:3000/${userDetail.photo}`} // Asegúrate de que `userDetail.photo` sea una URL válida
+                  alt="Profile photo"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    borderRadius: "50%",
+                  }}
+                />
+              ) : (
+                <p>No profile photo</p>
+              )}
+              <h1 className="welcome-title">Welcome to your profile, {userDetail.username}!</h1>
+            </div>
 
+            <div>
+              <button className="btn-submit" onClick={goToDetailUser}>
+                Modify profile
+              </button>
+            </div>
           </div>
-          <h2>Welcome to your profile, {userDetail.username}!</h2>
-          <span>{userDetail.photo}</span>
-          <div>My balance: {userDetail.balance}</div>
+          <div className="balance">
+            <h2 className="title-balance">
+              My balance: {userDetail.balance} €
+            </h2>
+            <div>
+              <button onClick={goToNewTransaction} className="btn-submit">
+                New Transaction
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
         <div>User not found</div>
       )}
-      <hr />
-      <div>
-        <button onClick={goToDetailUser}>Modify profile</button>
-      </div>
-      <hr />
-      <div>
-        <button onClick={goToNewTransaction}>New Transaction</button>
-      </div>
 
       <div>
         <TransactionPage />

@@ -17,7 +17,7 @@ const ChangePasswordForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !newPassword) {
-      alert("Email y nueva contraseña son necesarios");
+      alert("Email and new password are required");
       return;
     }
     const response = await fetch("http://localhost:3000/api/change-password", {
@@ -28,16 +28,52 @@ const ChangePasswordForm = () => {
       body: JSON.stringify({ email, newPassword }),
     });
     const result = await response.json();
+    if (result.success) {
+      alert("Password successfully updated.");
+      navigate("/login");  // Redirige al login solo si el cambio fue exitoso
+    } else {
+      alert("Error: " + result.message);  // Muestra un mensaje de error si algo salió mal
+    }
     return result;
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" value={email} onChange={handleEmailChange} placeholder="Email" required/>
-      <input type="password" value={newPassword} onChange={handlePasswordChange} placeholder="New password" required/>
-      <div></div>
-      <button type="submit" onClick={() => navigate("/login")}>Change Password</button>
-    </form>
+    <div className="container-access">
+      <div>
+        <h1>Set your new password</h1>
+      </div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div className="input-form">
+          <div className="email">
+            <span >Email: </span>
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="password">
+            <span>New password: </span>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={handlePasswordChange}
+              placeholder="Enter the new password"
+              required
+            />
+          </div>
+          </div>
+          
+          
+
+          <button type="submit" onClick={handleSubmit} className="btn-submit">Submit</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

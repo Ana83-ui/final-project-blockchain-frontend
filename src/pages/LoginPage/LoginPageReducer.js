@@ -14,8 +14,8 @@ const loginPageReducer = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        user: action.payload.user, 
-        token: action.payload.token || ""
+        user: action.payload.user,
+        token: action.payload.token || "",
       };
     case UPDATE_LOGIN_USER:
       return {

@@ -1,8 +1,7 @@
 import { DETAIL_USER_PROFILE } from "./MyProfileComponentAction";
 
 const initialState = {
-  userDetail: {}
-     
+  userDetail: {},
 };
 
 export const myProfileComponentReducer = (state = initialState, action) => {
@@ -10,7 +9,7 @@ export const myProfileComponentReducer = (state = initialState, action) => {
     case DETAIL_USER_PROFILE:
       return {
         ...state,
-        userDetail: action.payload
+        userDetail: action.payload,
       };
 
     default:
@@ -18,4 +17,4 @@ export const myProfileComponentReducer = (state = initialState, action) => {
   }
 };
 
-export default myProfileComponentReducer
+export default myProfileComponentReducer;

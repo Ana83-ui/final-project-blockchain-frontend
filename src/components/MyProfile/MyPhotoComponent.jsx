@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
-const Profile = () => {
+const MyPhotoComponent = () => {
   const [photo, setPhoto] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
-    username: 'John Doe',
-    email: 'john.doe@example.com',
-    photo: null, // Aquí es donde guardaremos la URL de la foto de perfil
+    username: '',
+    email: '',
+    photo: null, 
   });
 
+  //carga el usuario al inicio
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user')); // O lo que uses para almacenar el usuario
+    if (userData && !user.username) {
+      setUser(userData); // Si ya tienes la foto y demás datos almacenados
+    }
+  }, []);
+
   const handlePhotoChange = (e) => {
-    const file = e.target.files[0];  // Obtener el archivo seleccionado
+    const file = e.target.files[0];  
     setPhoto(file);
   };
 
@@ -19,7 +28,7 @@ const Profile = () => {
     e.preventDefault();
 
     if (!photo) {
-      setError('Por favor selecciona una imagen');
+      setError('Please select a photo');
       return;
     }
 
@@ -28,11 +37,18 @@ const Profile = () => {
 
     setLoading(true);
 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('No token found, please log in again.');
+      return;
+    }
+
+
     fetch('http://localhost:3000/api/upload', {
       method: 'POST',
       body: formData,  // Enviar el archivo en el cuerpo de la solicitud
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,  // Si usas un token de autenticación
+        'auth-token': token,  // Si usas un token de autenticación
       },
     })
     .then(response => response.json())
@@ -40,47 +56,49 @@ const Profile = () => {
       setLoading(false);
       if (data.photo) {
         // Actualizamos la foto de perfil con la URL que retorna el servidor
-        setUser(prevUser => ({
-          ...prevUser,
-          photo: data.photo,
-        }));
+        const updatedUser = { ...user, photo: data.photo };
+
+        // Guardamos el usuario actualizado en el localStorage
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+
+        setUser(updatedUser);  // Actualizamos el estado local con el usuario actualizado
       } else {
-        setError('Error al subir la imagen');
+        setError('Error to update the photo');
       }
     })
     .catch(err => {
       setLoading(false);
-      setError('Hubo un error al subir la foto');
+      setError('There was an error uploading the photo');
       console.error(err);
     });
   };
 
   return (
     <div className="profile">
-      <h2>Perfil de {user.username}</h2>
-      <p>Email: {user.email}</p>
-
-      {/* Mostrar la foto de perfil actual */}
       {user.photo ? (
-        <img src={`http://localhost:3000${user.photo}`} alt="Foto de perfil" />
+        <img 
+          src={`http://localhost:3000/${user.photo}`}  
+          alt="Profile photo" className='photo-profile'
+        />
       ) : (
-        <p>No tienes foto de perfil</p>
+        <p>You don't have a profile photo</p>
       )}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form'>
         <input 
           type="file" 
           accept="image/*" 
           onChange={handlePhotoChange} 
         />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Subiendo...' : 'Subir Foto'}
+        <button type="submit" disabled={loading} className='btn-modify'>
+          {loading ? 'Uploading...' : 'Upload Photo'}
         </button>
       </form>
+
 
       {error && <p className="error">{error}</p>}
     </div>
   );
 };
 
-export default Profile;
+export default MyPhotoComponent;

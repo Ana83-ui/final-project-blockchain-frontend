@@ -1,16 +1,16 @@
-export const ALL_TRANSACTIONS = "ALL_TRANSACTIONS";
-export const SET_USER = "SET_USER"
+export const DETAIL_TRANSACTIONS = "ALL_TRANSACTIONS";
+// export const SET_USER = "SET_USER";
 
-export const getTransaction = (transactions) => {
+export const getTransactionByUser = (transactions) => {
   return {
-    type: ALL_TRANSACTIONS,
+    type: DETAIL_TRANSACTIONS,
     payload: transactions,
   };
 };
 
-export const setUser = (user) => {
-  return {
-    type: SET_USER,
-    payload: user
-  };
-};
+// export const setUser = (user) => {
+//   return {
+//     type: SET_USER,
+//     payload: user,
+//   };
+// };

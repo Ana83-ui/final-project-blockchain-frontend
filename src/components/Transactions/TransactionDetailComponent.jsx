@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router";
 import { deleteTransactionById } from "../../core/services/fetchTransaction";
-import dynamic from "../../assets/dynamic.jpg"
+import registro from "../../assets/registro.jpg"
 
 const TransactionDetailComponent = () => {
   let navigate = useNavigate();
@@ -32,7 +32,7 @@ const TransactionDetailComponent = () => {
   return (
     <div className="container-personal">
       <div>
-        <img src={dynamic} alt="" />
+        <img src={registro} alt="book credit" className="img-new-transaction"/>
       </div>
       <div>
           <h1>Details of the transaction</h1>
@@ -40,27 +40,27 @@ const TransactionDetailComponent = () => {
       {transaction ? (
         <div className="detail-transaction">
           <div>
-            <span>Transaction Number: </span>
+            <span className="title-span">Transaction Number: </span>
             <span>{transaction._id}</span>
           </div>
           <div>
-            <span>Sender: </span>
+            <span className="title-span">Sender: </span>
             <span>{transaction.sender}</span>
           </div>
           <div>
-            <span>Receiver: </span>
+            <span className="title-span">Receiver: </span>
             <span>{transaction.receiver}</span>
           </div>
           <div>
-            <span>Amount: </span>
+            <span className="title-span">Amount: </span>
             <span>{transaction.amount} €</span>
           </div>
           <div>
-            <span>Date: </span>
+            <span className="title-span">Date: </span>
             <span>{formatDate(transaction.timestamp)}</span>
           </div>
           <div>
-            <span>Status: </span>
+            <span className="title-span">Status: </span>
             <span>{transaction.status}</span>
           </div>
         </div>

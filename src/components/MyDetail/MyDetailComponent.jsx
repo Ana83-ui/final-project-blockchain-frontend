@@ -93,7 +93,7 @@ const MyDetailComponent = () => {
           </div>
           <div className="detail-transaction">
             <div>
-              <span>Username: </span>
+              <span className="title-span">Username: </span>
               {isEditing ? (
                 <input
                   type="text"
@@ -107,7 +107,7 @@ const MyDetailComponent = () => {
             </div>
   
             <div>
-              <span>Email: </span>
+              <span className="title-span">Email: </span>
               {isEditing ? (
                 <input
                   type="text"
@@ -121,7 +121,7 @@ const MyDetailComponent = () => {
             </div>
   
             <div>
-              <span>Balance: </span>
+              <span className="title-span">Balance: </span>
               {isEditing ? (
                 <input
                   type="text"
@@ -141,7 +141,11 @@ const MyDetailComponent = () => {
                   <button onClick={backToUserProfile} className="btn-register" >Cancelar</button>
                 </div>
               ) : (
-                <button onClick={() => setIsEditing(true)} className="btn-modify" >Modificar</button>
+                <div>
+                   <button onClick={() => setIsEditing(true)} className="btn-modify" >Modificar</button>
+                <button onClick={()=>{navigate("/profile")}} className="btn-modify">Close</button>
+                </div>
+               
               )}
             </div>
           </div>

@@ -4,7 +4,7 @@ import { addNewTransaction } from "../../core/services/fetchTransaction";
 import { addItemTransaction } from "./NewTransactionComponentAction";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-// import denis from "../../assets/denis.jpg"
+import coinhako from "../../assets/coinhako.jpg"
 
 
 const NewTransactionComponent = () => {
@@ -56,11 +56,10 @@ const NewTransactionComponent = () => {
   };
 
   return (
-    <div className="container-access">
-      {/* <div>
-        <img src={denis} alt="" />
-      </div> */}
-      <h1>Your new transaction starts here</h1>
+    <div className="container-personal">
+      
+      <div className="new-transaction">
+        <h1>Your new transaction starts here</h1>
       <div className="input-form"> 
         <div>
         <span className="sender">Sender: </span>
@@ -79,6 +78,12 @@ const NewTransactionComponent = () => {
         <button onClick={backToUserProfile} className="btn-register" >Cancel</button>
       </div>
       </div>
+      </div>
+
+      <div>
+        <img src={coinhako} alt="mobile picture with information of bank movements" className="img-new-transaction"/>
+      </div>
+      
       
     </div>
   );

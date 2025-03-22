@@ -1,13 +1,8 @@
 import { DETAIL_USER_PROFILE, UPDATE_USER, updateUser } from "./MyProfileComponentAction";
 
 const initialState = {
-  userDetail: {},
-  updateUser:{
-    photo: "", 
-    username: "",
-    email: "",
-    balance: ""
-  }
+  userDetail: null,
+
 };
 
 

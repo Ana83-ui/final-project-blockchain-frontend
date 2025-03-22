@@ -7,7 +7,7 @@ import TransactionPage from "../../pages/TransactionPage/TransactionPage";
 
 const MyProfileComponent = () => {
   const userDetail = useSelector(
-    (state) => state.myDetailComponentReducer.userDetail
+    (state) => state.myProfileComponentReducer.userDetail
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,12 +20,11 @@ const MyProfileComponent = () => {
       dispatch(detailUser(user));
   
     } else {
-      alert("No user or token found in localStorage");
+      ("No user or token found in localStorage");
     }
   }, [dispatch]);
 
   useEffect(() => {
-
     console.log("userDetail has been updated:", userDetail);
   }, [userDetail]); 
 

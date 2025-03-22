@@ -2,8 +2,7 @@ import { DETAIL_USER, UPDATE_USER } from "././MyDetailComponentAction";
 
 const initialState = {
   userDetail: null,
-  updateUser: {
-  }
+
 };
 
 export const myDetailComponentReducer = (state = initialState, action) => {

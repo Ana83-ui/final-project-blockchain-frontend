@@ -30,9 +30,9 @@ const ChangePasswordForm = () => {
     const result = await response.json();
     if (result.success) {
       alert("Password successfully updated.");
-      navigate("/login");  // Redirige al login solo si el cambio fue exitoso
+      navigate("/"); 
     } else {
-      alert("Error: " + result.message);  // Muestra un mensaje de error si algo salió mal
+      alert("Error: " + result.message);
     }
     return result;
   };

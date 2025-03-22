@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUser } from "../../core/services/fetchUser";
+import { editUser, getDetailsUser } from "../../core/services/fetchUser";
 import { loadDetail, updateUser } from "./MyDetailComponentAction";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import MyPhotoComponent from "../MyProfile/MyPhotoComponent";
 import lachlan from "../../assets/lachlan.jpg"
+import { detailUser } from "../MyProfile/MyProfileComponentAction";
 
 const MyDetailComponent = () => {
-  const userDetail = useSelector(
-    (state) => state.myDetailComponentReducer.userDetail
-  );
+;  const userDetail = useSelector(
+  (state) => state.myDetailComponentReducer.userDetail
+);
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [newUser, setNewUser] = useState({
+    photo: "",
     username: "",
     email: "",
     balance: "",
@@ -28,7 +30,6 @@ const MyDetailComponent = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("Usuario desde localStorage:", user);
     if (token && user) {
       dispatch(loadDetail(user));
     } else {
@@ -40,6 +41,7 @@ const MyDetailComponent = () => {
     if (userDetail) {
       console.log("userDetail actualizado:", userDetail);
       setNewUser({
+        photo: userDetail.photo || "",
         username: userDetail.username || "",
         email: userDetail.email || "",
         balance: userDetail.balance || "",
@@ -50,17 +52,19 @@ const MyDetailComponent = () => {
   const editUserById = async (_id) => {
     try {
       const updatedUser = {
+        photo: newUser.photo,
         username: newUser.username,
         email: newUser.email,
         balance: newUser.balance,
-        photo: newUser.photo,
+        
       };
       const response = await editUser(_id, updatedUser);
-      console.log(response);
+      console.log("API response:", response);
       if (response && response.user) { 
-        dispatch(updateUser({ _id, updatedUser: response.user })); 
-        dispatch(loadDetail(response
+        dispatch(updateUser(response.user )); 
+        dispatch(loadDetail(response.user
         )); 
+        localStorage.setItem("user", JSON.stringify(response.user));
         alert("Successful modification");
         setIsEditing(false);
         navigate("/profile");
@@ -71,6 +75,8 @@ const MyDetailComponent = () => {
       alert("An error occurred while updating the user.");
     }
   };
+
+
 
   const inputHandler = (nameProp, valueProp) => {
     const updatedUser = { ...newUser, [nameProp]: valueProp };
@@ -86,7 +92,7 @@ const MyDetailComponent = () => {
     <div>
       <h1>My personal information</h1>
     
-      {userDetail ? (
+      {userDetail && Object.keys(userDetail).length > 0 ? (
         <>
            <div>
             <MyPhotoComponent />
@@ -137,12 +143,12 @@ const MyDetailComponent = () => {
             <div>
               {isEditing ? (
                 <div>
-                  <button onClick={() => editUserById(userDetail._id)} className="btn-register" >Guardar</button>
-                  <button onClick={backToUserProfile} className="btn-register" >Cancelar</button>
+                  <button onClick={() => editUserById(userDetail._id)} className="btn-register" >Save</button>
+                  <button onClick={backToUserProfile} className="btn-register" >Cancel</button>
                 </div>
               ) : (
                 <div>
-                   <button onClick={() => setIsEditing(true)} className="btn-modify" >Modificar</button>
+                   <button onClick={() => setIsEditing(true)} className="btn-modify" >Modify</button>
                 <button onClick={()=>{navigate("/profile")}} className="btn-modify">Close</button>
                 </div>
                

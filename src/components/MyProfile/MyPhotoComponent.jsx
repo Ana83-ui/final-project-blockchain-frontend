@@ -13,9 +13,9 @@ const MyPhotoComponent = () => {
 
   //carga el usuario al inicio
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user')); // O lo que uses para almacenar el usuario
+    const userData = JSON.parse(localStorage.getItem('user')); 
     if (userData && !user.username) {
-      setUser(userData); // Si ya tienes la foto y demás datos almacenados
+      setUser(userData); 
     }
   }, []);
 

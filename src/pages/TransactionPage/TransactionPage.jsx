@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 
 const TransactionPage = () => {
   const { transactions } = useSelector((state) => state.transactionPageReducer);
+  
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -40,7 +41,8 @@ const TransactionPage = () => {
     <div className="container-transaction">
       <h1 className="title-transaction">My transactions history</h1>
       {transactions && transactions.length > 0 ? (
-        transactions.map((t, idx) => {
+        transactions.map((t, idx) => {  
+        const receiverEmail = t.receiver?.email || "Unknown receiver";
           return (
             <div key={idx} className="transaction-card, div-with-line">
               <div>
@@ -49,7 +51,7 @@ const TransactionPage = () => {
               </div>
               <div>
                 <span>To: </span>
-                <span>{t.receiver}</span>
+                <span>{receiverEmail}</span>
               </div>
               <div>
                 <span>Amount: </span>

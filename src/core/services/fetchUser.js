@@ -1,4 +1,4 @@
-//obtener detalles del usaario
+//obtener detalles del usuario
 export const getDetailsUser = async (_id) => {
   const token = localStorage.getItem("token");
   console.log("Token:", token); // Verifica que el token sea correcto y esté disponible

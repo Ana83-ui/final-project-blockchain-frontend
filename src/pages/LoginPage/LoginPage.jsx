@@ -14,7 +14,7 @@ const LoginPage = () => {
     dispatch(updateLoginUser(nameProp, valueProp));
   };
 
-  // Manejo de login
+
   const loadedUser = async () => {
     if (!login.email || !login.password) {
       alert("Email or password is missing!");
@@ -41,7 +41,7 @@ const LoginPage = () => {
         );
         navigate("/profile");
       } else {
-        console.error("Invalid user data:", user);
+        alert("Invalid user data", user);
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -59,20 +59,33 @@ const LoginPage = () => {
   };
 
   const registerUser = async () => {
+
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailRegex.test(login.email)) {
+      alert("Please enter a valid email address (e.g., prueba@example.com).");
+      return;
+    }
+  
+
+    if (login.password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
+
     if (!login.email || !login.password) {
       alert("Email and password are required!");
       return;
     }
     try {
       const response = await registerNewUser(login);
-     // Si la respuesta es exitosa, seguimos con el flujo
+      alert("Successful registration")
       clearFields();
       console.log("API Response:", response);
       setFlagLogin(true);
       navigate("/login");
     } catch (error) {
       console.error("Registration failed", error);
-      // Asegúrate de capturar correctamente el mensaje de error
       if (error.message === "Email already registered") {
         alert("The email is already in the database");
       } else {
@@ -84,6 +97,8 @@ const LoginPage = () => {
   const goToResetPassword = () => {
     navigate("/password");
   };
+
+
 
   const title = flagLogin ? "We are glad to see you again!" : "Thank you for joining us";
 
@@ -107,7 +122,7 @@ const LoginPage = () => {
             <span>Password: </span>
             <input type="password" placeholder="Enter a password" name="password" value={login.password} onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
           </div>
-          <div>
+          <div className="btn-bis">
             <button className="btn-register" onClick={registerUser}>Register</button>
           </div>
         </div>

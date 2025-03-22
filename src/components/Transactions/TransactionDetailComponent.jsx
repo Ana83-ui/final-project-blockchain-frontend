@@ -45,11 +45,11 @@ const TransactionDetailComponent = () => {
           </div>
           <div>
             <span className="title-span">Sender: </span>
-            <span>{transaction.sender}</span>
+            <span>{transaction.sender.email}</span>
           </div>
           <div>
             <span className="title-span">Receiver: </span>
-            <span>{transaction.receiver}</span>
+            <span>{transaction.receiver.email}</span>
           </div>
           <div>
             <span className="title-span">Amount: </span>

@@ -3,10 +3,7 @@ import { DETAIL_USER, UPDATE_USER } from "././MyDetailComponentAction";
 const initialState = {
   userDetail: null,
   updateUser: {
-    username: "",
-    email: "",
-    balance: ""
-  },
+  }
 };
 
 export const myDetailComponentReducer = (state = initialState, action) => {
@@ -20,10 +17,7 @@ export const myDetailComponentReducer = (state = initialState, action) => {
     case UPDATE_USER:
       return {
         ...state,
-        userDetail: {
-          ...state.userDetail,
-          ...action.payload.updateUser
-        },
+        userDetail: action.payload
       };
     default:
       return state;

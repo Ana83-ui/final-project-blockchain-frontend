@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { detailUser } from "./MyProfileComponentAction";
+import { detailUser, updateUser } from "./MyProfileComponentAction";
 import TransactionPage from "../../pages/TransactionPage/TransactionPage";
 
 
 const MyProfileComponent = () => {
   const userDetail = useSelector(
-    (state) => state.myProfileComponentReducer.userDetail
+    (state) => state.myDetailComponentReducer.userDetail
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,17 +18,16 @@ const MyProfileComponent = () => {
 
     if (token && user) {
       dispatch(detailUser(user));
+  
     } else {
-      console.log("No user or token found in localStorage");
+      alert("No user or token found in localStorage");
     }
   }, [dispatch]);
 
   useEffect(() => {
-    // Cuando userDetail cambie, podría ser un buen lugar para mostrar los cambios
+
     console.log("userDetail has been updated:", userDetail);
-  }, [userDetail]); // Este useEffect se ejecutará cada vez que se actualicen los detalles del usuario
-
-
+  }, [userDetail]); 
 
   const goToDetailUser = () => {
     navigate("/details");
@@ -39,14 +38,14 @@ const MyProfileComponent = () => {
   };
 
   return (
-    <div>
+    <div className="container-profile">
       {userDetail ? (
         <div>
           <div className="welcome-profile">
             <div className="photo">
               {userDetail.photo ? (
                 <img
-                  src={`http://localhost:3000/${userDetail.photo}`} // Asegúrate de que `userDetail.photo` sea una URL válida
+                  src={`http://localhost:3000/${userDetail.photo}`} 
                   alt="Profile photo"
                   style={{
                     width: "100px",

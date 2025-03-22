@@ -9,18 +9,12 @@ export const loadDetail = (userData) => {
   };
 };
 
-// export const updateUser = (userData) => {
-//   return {
-//     type: UPDATE_USER,
-//     payload: userData,
-//   };
-// };
 
-// Acción de actualización
-export const updateUser = (updatedUser) => {
+// action to update
+export const updateUser = (user) => {
   return {
     type: UPDATE_USER,
-    payload: updatedUser
+    payload: user
   };
 };
 

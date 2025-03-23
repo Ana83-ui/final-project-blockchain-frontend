@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editUser, getDetailsUser } from "../../core/services/fetchUser";
+import { deleteUserById, editUser, getDetailsUser } from "../../core/services/fetchUser";
 import { loadDetail, updateUser } from "./MyDetailComponentAction";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import MyPhotoComponent from "../MyProfile/MyPhotoComponent";
 import lachlan from "../../assets/lachlan.jpg"
-import { detailUser } from "../MyProfile/MyProfileComponentAction";
+
 
 const MyDetailComponent = () => {
-;  const userDetail = useSelector(
-  (state) => state.myDetailComponentReducer.userDetail
-);
+ const userDetail = useSelector((state) => state.myDetailComponentReducer.userDetail);
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -39,7 +37,6 @@ const MyDetailComponent = () => {
 
   useEffect(() => {
     if (userDetail) {
-      console.log("userDetail actualizado:", userDetail);
       setNewUser({
         photo: userDetail.photo || "",
         username: userDetail.username || "",
@@ -55,33 +52,37 @@ const MyDetailComponent = () => {
         photo: newUser.photo,
         username: newUser.username,
         email: newUser.email,
-        balance: newUser.balance,
-        
+        balance: newUser.balance, 
       };
       const response = await editUser(_id, updatedUser);
-      console.log("API response:", response);
       if (response && response.user) { 
         dispatch(updateUser(response.user )); 
-        dispatch(loadDetail(response.user
-        )); 
+        dispatch(loadDetail(response.user )); 
         localStorage.setItem("user", JSON.stringify(response.user));
         alert("Successful modification");
         setIsEditing(false);
         navigate("/profile");
       } else {
-        alert("Failed to update user.");
+        alert("Failed to update user");
       }
     } catch (error) {
       alert("An error occurred while updating the user.");
     }
   };
 
-
+ const removeUser = async (_id)=>{
+  const response = await deleteUserById(_id);
+    if (response) {
+      alert("The user has been deleted")
+      navigate("/login");
+    } else {
+      console.log("Error deleting de user");
+    }
+ }
 
   const inputHandler = (nameProp, valueProp) => {
     const updatedUser = { ...newUser, [nameProp]: valueProp };
     setNewUser(updatedUser);
-    console.log("Nuevo estado:", updatedUser);
   };
 
   return (
@@ -91,7 +92,6 @@ const MyDetailComponent = () => {
     </div>
     <div>
       <h1>My personal information</h1>
-    
       {userDetail && Object.keys(userDetail).length > 0 ? (
         <>
            <div>
@@ -101,12 +101,7 @@ const MyDetailComponent = () => {
             <div>
               <span className="title-span">Username: </span>
               {isEditing ? (
-                <input
-                  type="text"
-                  value={newUser.username}
-                  name="username"
-                  onChange={(e) => inputHandler(e.target.name, e.target.value)}
-                />
+                <input type="text" value={newUser.username} name="username" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
               ) : (
                 <span>{userDetail.username}</span>
               )}
@@ -115,12 +110,7 @@ const MyDetailComponent = () => {
             <div>
               <span className="title-span">Email: </span>
               {isEditing ? (
-                <input
-                  type="text"
-                  value={newUser.email}
-                  name="email"
-                  onChange={(e) => inputHandler(e.target.name, e.target.value)}
-                />
+                <input type="text" value={newUser.email} name="email" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
               ) : (
                 <span>{userDetail.email}</span>
               )}
@@ -129,15 +119,13 @@ const MyDetailComponent = () => {
             <div>
               <span className="title-span">Balance: </span>
               {isEditing ? (
-                <input
-                  type="text"
-                  value={newUser.balance}
-                  name="balance"
-                  onChange={(e) => inputHandler(e.target.name, e.target.value)}
-                />
+                <input type="text" value={newUser.balance} name="balance" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
               ) : (
                 <span>{userDetail.balance} €</span>
               )}
+            </div>
+            <div>
+              <span onClick={()=>{removeUser(userDetail._id)}} className="opt_out" >Click here to cancel these service</span>
             </div>
   
             <div>
@@ -148,8 +136,8 @@ const MyDetailComponent = () => {
                 </div>
               ) : (
                 <div>
-                   <button onClick={() => setIsEditing(true)} className="btn-modify" >Modify</button>
-                <button onClick={()=>{navigate("/profile")}} className="btn-modify">Close</button>
+                  <button onClick={() => setIsEditing(true)} className="btn-modify" >Modify</button>
+                  <button onClick={()=>{navigate("/profile")}} className="btn-modify">Close</button>
                 </div>
                
               )}
@@ -157,7 +145,7 @@ const MyDetailComponent = () => {
           </div>
         </>
       ) : (
-        <p>Cargando los detalles del usuario...</p>
+        <p>Loading the user details...</p>
       )}
     </div>
       

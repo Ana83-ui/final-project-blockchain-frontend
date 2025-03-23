@@ -24,9 +24,16 @@ const TransactionPage = () => {
   }, []);
 
   const goToDetailTransaction = (transaction) => {
-    navigate("/transaction", {
+    const receiverEmail = transaction.receiver?.email;
+    if(!receiverEmail){
+      alert ("Receiver not found")
+      navigate("/profile")
+    } else{
+     navigate("/transaction", {
       state: { transaction },
-    });
+    }); 
+    }
+    
   };
 
   const formatDate = (timestamp) => {
@@ -42,7 +49,9 @@ const TransactionPage = () => {
       <h1 className="title-transaction">My transactions history</h1>
       {transactions && transactions.length > 0 ? (
         transactions.map((t, idx) => {  
+
         const receiverEmail = t.receiver?.email || "Unknown receiver";
+        
           return (
             <div key={idx} className="transaction-card, div-with-line">
               <div>
@@ -50,14 +59,13 @@ const TransactionPage = () => {
                 <span>{formatDate(t.timestamp)}</span>
               </div>
               <div>
-                <span>To: </span>
                 <span>{receiverEmail}</span>
               </div>
               <div>
                 <span>Amount: </span>
                 <span>{t.amount} €</span>
               </div>
-              
+
               <button onClick={() => {goToDetailTransaction(t);}} className="btn-go" >+ Info</button>
        
             </div>

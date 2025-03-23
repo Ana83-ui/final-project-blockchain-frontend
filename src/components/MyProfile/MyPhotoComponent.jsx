@@ -11,7 +11,7 @@ const MyPhotoComponent = () => {
     photo: null, 
   });
 
-  //carga el usuario al inicio
+  //load the user at startup
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem('user')); 
     if (userData && !user.username) {
@@ -26,7 +26,6 @@ const MyPhotoComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!photo) {
       setError('Please select a photo');
       return;
@@ -34,7 +33,6 @@ const MyPhotoComponent = () => {
 
     const formData = new FormData();
     formData.append('photo', photo);
-
     setLoading(true);
 
     const token = localStorage.getItem('token');
@@ -43,25 +41,20 @@ const MyPhotoComponent = () => {
       return;
     }
 
-
     fetch('http://localhost:3000/api/upload', {
       method: 'POST',
-      body: formData,  // Enviar el archivo en el cuerpo de la solicitud
+      body: formData,  
       headers: {
-        'auth-token': token,  // Si usas un token de autenticación
+        'auth-token': token,  
       },
     })
     .then(response => response.json())
     .then(data => {
       setLoading(false);
       if (data.photo) {
-        // Actualizamos la foto de perfil con la URL que retorna el servidor
         const updatedUser = { ...user, photo: data.photo };
-
-        // Guardamos el usuario actualizado en el localStorage
         localStorage.setItem('user', JSON.stringify(updatedUser));
-
-        setUser(updatedUser);  // Actualizamos el estado local con el usuario actualizado
+        setUser(updatedUser);  
       } else {
         setError('Error to update the photo');
       }
@@ -85,16 +78,11 @@ const MyPhotoComponent = () => {
       )}
 
       <form onSubmit={handleSubmit} className='form'>
-        <input 
-          type="file" 
-          accept="image/*" 
-          onChange={handlePhotoChange} 
-        />
+        <input type="file" accept="image/*" onChange={handlePhotoChange}/>
         <button type="submit" disabled={loading} className='btn-modify'>
           {loading ? 'Uploading...' : 'Upload Photo'}
         </button>
       </form>
-
 
       {error && <p className="error">{error}</p>}
     </div>

@@ -16,6 +16,12 @@ const ChangePasswordForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (newPassword.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
     if (!email || !newPassword) {
       alert("Email and new password are required");
       return;
@@ -28,14 +34,19 @@ const ChangePasswordForm = () => {
       body: JSON.stringify({ email, newPassword }),
     });
     const result = await response.json();
+
     if (result.success) {
-      alert("Password successfully updated.");
-      navigate("/"); 
+      alert("Password successfully updated");
+      navigate("/login"); 
     } else {
       alert("Error: " + result.message);
     }
     return result;
   };
+
+  const goToLogin=()=>{
+    navigate("/login")
+  }
 
   return (
     <div className="container-access">
@@ -47,30 +58,15 @@ const ChangePasswordForm = () => {
           <div className="input-form">
           <div className="email">
             <span >Email: </span>
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Enter your email"
-              required
-            />
+            <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter your email" required/>
           </div>
-
           <div className="password">
             <span>New password: </span>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={handlePasswordChange}
-              placeholder="Enter the new password"
-              required
-            />
+            <input type="password" value={newPassword} onChange={handlePasswordChange} placeholder="Enter the new password" required/>
           </div>
           </div>
-          
-          
-
           <button type="submit" onClick={handleSubmit} className="btn-submit">Submit</button>
+          <button onClick={goToLogin} className="btn-submit">Cancel</button>
         </form>
       </div>
     </div>

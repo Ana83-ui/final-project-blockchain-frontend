@@ -4,8 +4,7 @@ import { addNewTransaction } from "../../core/services/fetchTransaction";
 import { addItemTransaction } from "./NewTransactionComponentAction";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import coinhako from "../../assets/coinhako.jpg"
-
+import coinhako from "../../assets/coinhako.jpg";
 
 const NewTransactionComponent = () => {
   const dispatch = useDispatch();
@@ -27,11 +26,7 @@ const NewTransactionComponent = () => {
   };
 
   const addTransaction = async () => {
-    if (
-      !newTransaction.sender ||
-      !newTransaction.receiver ||
-      !newTransaction.amount
-    ) {
+    if ( !newTransaction.sender || !newTransaction.receiver || !newTransaction.amount ) {
       alert("All fields ar required");
       return;
     }
@@ -57,34 +52,32 @@ const NewTransactionComponent = () => {
 
   return (
     <div className="container-personal">
-      
       <div className="new-transaction">
         <h1>Your new transaction starts here</h1>
-      <div className="input-form"> 
-        <div>
-        <span className="sender">Sender: </span>
-          <input type="text" placeholder="Enter your email address" value={setNewTransaction.sender} name="sender" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+        <div className="input-form">
+          <div>
+            <span className="sender">Sender: </span>
+            <input type="text" placeholder="Enter your email address"  value={newTransaction.sender} name="sender" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+          </div>
+          <div>
+            <span className="receiver">Receiver: </span>
+            <input type="text" placeholder="Enter the recipient’s email" value={newTransaction.receiver} name="receiver" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+          </div>
+          <div>
+            <span className="amount">Amount: </span>
+            <input type="text" placeholder="Amount to sent" value={newTransaction.amount} name="amount" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+          </div>
+          <div className="btn-bis">
+            <button onClick={addTransaction} className="btn-register">Send</button>
+            <button onClick={backToUserProfile} className="btn-register">Cancel</button>
+          </div>
+        </div>
       </div>
       <div>
-        <span className="receiver">Receiver: </span>
-        <input type="text" placeholder="Enter the recipient’s email" value={setNewTransaction.receiver} name="receiver" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+        <img src={coinhako} alt="mobile picture with information of bank movements"
+          className="img-new-transaction"
+        />
       </div>
-      <div>
-        <span className="amount">Amount: </span>
-        <input type="text" placeholder="Amount to sent" value={setNewTransaction.amount} name="amount" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
-      </div>
-      <div className="btn-bis">
-        <button onClick={addTransaction} className="btn-register">Send</button>
-        <button onClick={backToUserProfile} className="btn-register" >Cancel</button>
-      </div>
-      </div>
-      </div>
-
-      <div>
-        <img src={coinhako} alt="mobile picture with information of bank movements" className="img-new-transaction"/>
-      </div>
-      
-      
     </div>
   );
 };

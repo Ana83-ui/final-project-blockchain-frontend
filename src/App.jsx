@@ -10,6 +10,7 @@ import TransactionDetailComponent from "./components/Transactions/TransactionDet
 import MyDetailComponent from "./components/MyDetail/MyDetailComponent";
 import NewTransactionComponent from "./components/Transactions/NewTransactionComponent";
 import ChangePasswordComponent from "./components/Password/ChangePasswordComponent";
+import ContactComponent from "./components/Contact/ContactComponent";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/transaction" element={<TransactionDetailComponent />}/>
               <Route path="/transactions" element={<NewTransactionComponent />}/>
               <Route path="/password" element={<ChangePasswordComponent />} />
+              <Route path="/contact" element={<ContactComponent />} />
             </Routes>
           </HomeLayout>
         </BrowserRouter>

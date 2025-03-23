@@ -9,8 +9,6 @@ export const loadDetail = (userData) => {
   };
 };
 
-
-// action to update
 export const updateUser = (user) => {
   return {
     type: UPDATE_USER,

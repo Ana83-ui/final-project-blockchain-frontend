@@ -14,7 +14,6 @@ const LoginPage = () => {
     dispatch(updateLoginUser(nameProp, valueProp));
   };
 
-
   const loadedUser = async () => {
     if (!login.email || !login.password) {
       alert("Email or password is missing!");
@@ -22,13 +21,11 @@ const LoginPage = () => {
     }
     try {
       const user = await loginUser(login.email, login.password);
-      console.log("User from login:", user);
+
       if (user && user.user) {
         localStorage.setItem("token", user.token);
         localStorage.setItem("user", JSON.stringify(user.user));
 
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("user", JSON.stringify(user.user));
         dispatch(
           userLogin({
             _id: user.user._id,
@@ -49,7 +46,6 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    console.log("Login data in Redux:", login);
   }, [login]);
 
   const clearFields = () => {
@@ -59,19 +55,16 @@ const LoginPage = () => {
   };
 
   const registerUser = async () => {
-
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailRegex.test(login.email)) {
       alert("Please enter a valid email address (e.g., prueba@example.com).");
       return;
     }
-  
 
     if (login.password.length < 8) {
       alert("Password must be at least 8 characters long.");
       return;
     }
-
 
     if (!login.email || !login.password) {
       alert("Email and password are required!");
@@ -81,11 +74,9 @@ const LoginPage = () => {
       const response = await registerNewUser(login);
       alert("Successful registration")
       clearFields();
-      console.log("API Response:", response);
       setFlagLogin(true);
       navigate("/login");
     } catch (error) {
-      console.error("Registration failed", error);
       if (error.message === "Email already registered") {
         alert("The email is already in the database");
       } else {
@@ -98,7 +89,9 @@ const LoginPage = () => {
     navigate("/password");
   };
 
-
+  const goToHome = () => {
+    navigate("/");
+  };
 
   const title = flagLogin ? "We are glad to see you again!" : "Thank you for joining us";
 
@@ -124,6 +117,7 @@ const LoginPage = () => {
           </div>
           <div className="btn-bis">
             <button className="btn-register" onClick={registerUser}>Register</button>
+            <button onClick={goToHome}  className="btn-register">Cancel</button>
           </div>
         </div>
       )}
@@ -156,11 +150,8 @@ const LoginPage = () => {
                     <p className="register-access" onClick={goToResetPassword}>Click here</p>
                   </div>
                     <div >
-                    
                   </div>
-                  
                   </div>
-                  
                 </div>
               ) : (
                 <div>

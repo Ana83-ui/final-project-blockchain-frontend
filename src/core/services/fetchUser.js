@@ -1,4 +1,3 @@
-//obtener detalles del usuario
 export const getDetailsUser = async (_id) => {
   const token = localStorage.getItem("token");
   console.log("Token:", token); // Verifica que el token sea correcto y esté disponible
@@ -12,7 +11,6 @@ export const getDetailsUser = async (_id) => {
   });
 };
 
-//login
 export const loginUser = async (email, password) => {
   const res = await fetch("http://localhost:3000/api/login/", {
     method: "POST",
@@ -36,11 +34,10 @@ export const loginUser = async (email, password) => {
       console.log(user);
     }
   }
-
   return result;
 };
 
-// nuevo registro
+
 export const registerNewUser = async (loginData) => {
   const res = await fetch("http://localhost:3000/api/signup", {
     method: "POST",
@@ -58,7 +55,7 @@ export const registerNewUser = async (loginData) => {
   return result;
 };
 
-//modificar usuario
+
 export const editUser = async (_id, updateUser) => {
   const token = localStorage.getItem("token");
   console.log("Token:", token);
@@ -79,9 +76,21 @@ export const editUser = async (_id, updateUser) => {
   return result;
 };
 
-//obtener todos los usuarios
+
 export const fetchAllUsers = async () => {
   const res = await fetch("http://localhost:3000/api/users");
+  const result = await res.json();
+  return result;
+};
+
+
+export const deleteUserById = async (_id) => {
+  const res = await fetch(`http://localhost:3000/api/users/${_id}`, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
   const result = await res.json();
   return result;
 };

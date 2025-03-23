@@ -19,7 +19,6 @@ const TransactionDetailComponent = () => {
   };
 
 
-
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     const day = String(date.getDate()).padStart(2, "0");
@@ -27,7 +26,6 @@ const TransactionDetailComponent = () => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-
 
   return (
     <div className="container-personal">
@@ -46,6 +44,8 @@ const TransactionDetailComponent = () => {
           <div>
             <span className="title-span">Sender: </span>
             <span>{transaction.sender.email}</span>
+          
+
           </div>
           <div>
             <span className="title-span">Receiver: </span>

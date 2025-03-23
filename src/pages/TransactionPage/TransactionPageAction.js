@@ -1,5 +1,4 @@
 export const DETAIL_TRANSACTIONS = "ALL_TRANSACTIONS";
-// export const SET_USER = "SET_USER";
 
 export const getTransactionByUser = (transactions) => {
   return {
@@ -8,9 +7,3 @@ export const getTransactionByUser = (transactions) => {
   };
 };
 
-// export const setUser = (user) => {
-//   return {
-//     type: SET_USER,
-//     payload: user,
-//   };
-// };

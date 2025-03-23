@@ -1,13 +1,4 @@
-// export const fetchAllTransaction = async () => {
-//   const response = await fetch("http://localhost:3000/api/transactions");
-//   if (!response.ok) {
-//     throw new Error("Error fetching transactions");
-//   }
-//   const data = await response.json();
-//   return data.transactions;
-// };
 
-// obtener transaccion por usuario
 export const getTransactionById = async () => {
   const token = localStorage.getItem("token");
   if (!token) {
@@ -32,14 +23,12 @@ export const getTransactionById = async () => {
   }
 };
 
-// detalle de la transaccion
 export const getDetailTransaction = async (_id) => {
   const res = await fetch(`http://localhost:3000/api/transactions/${_id}`);
   const result = await res.json();
   return result;
 };
 
-//elimianr transaccion
 export const deleteTransactionById = async (_id) => {
   const res = await fetch(`http://localhost:3000/api/transactions/${_id}`, {
     method: "DELETE",
@@ -51,7 +40,6 @@ export const deleteTransactionById = async (_id) => {
   return result;
 };
 
-//nueva transaccion
 export const addNewTransaction = async (transaction) => {
   const res = await fetch("http://localhost:3000/api/transactions", {
     method: "POST",

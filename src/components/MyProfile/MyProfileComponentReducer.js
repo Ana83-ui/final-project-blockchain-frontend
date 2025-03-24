@@ -1,7 +1,7 @@
 import {  DETAIL_USER_PROFILE,  UPDATE_USER } from "./MyProfileComponentAction";
 
 const initialState = {
-  userDetail: null,
+  userDetail: {},
 };
 
 export const myProfileComponentReducer = (state = initialState, action) => {
@@ -16,6 +16,7 @@ export const myProfileComponentReducer = (state = initialState, action) => {
         ...state,
         userDetail: action.payload,
       };
+
     default:
       return state;
   }

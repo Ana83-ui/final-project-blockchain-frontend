@@ -3,11 +3,13 @@ import { useNavigate } from "react-router";
 import { addNewTransaction } from "../../core/services/fetchTransaction";
 import { addItemTransaction } from "./NewTransactionComponentAction";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import coinhako from "../../assets/coinhako.jpg";
 
+
 const NewTransactionComponent = () => {
-  const dispatch = useDispatch();
+
+   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const backToUserProfile = () => {
@@ -27,7 +29,7 @@ const NewTransactionComponent = () => {
 
   const addTransaction = async () => {
     if ( !newTransaction.sender || !newTransaction.receiver || !newTransaction.amount ) {
-      alert("All fields ar required");
+      alert("All fields are required");
       return;
     }
     const transactionToAdd = {
@@ -36,13 +38,15 @@ const NewTransactionComponent = () => {
       amount: parseInt(newTransaction.amount),
     };
     const response = await addNewTransaction(transactionToAdd);
-    if (response) {
-      dispatch(addItemTransaction(newTransaction));
-      setNewTransaction({
+    if (response && response.transaction) {
+       dispatch(addItemTransaction(newTransaction));
+       setNewTransaction({
         sender: "",
         receiver: "",
         amount: "",
       });
+     
+
       alert("Transaction send");
       navigate("/profile");
     } else {
@@ -74,9 +78,7 @@ const NewTransactionComponent = () => {
         </div>
       </div>
       <div>
-        <img src={coinhako} alt="mobile picture with information of bank movements"
-          className="img-new-transaction"
-        />
+        <img src={coinhako} alt="mobile picture with information of bank movements" className="img-new-transaction"/>
       </div>
     </div>
   );

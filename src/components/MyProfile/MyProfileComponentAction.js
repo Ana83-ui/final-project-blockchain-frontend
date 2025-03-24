@@ -1,6 +1,7 @@
 export const DETAIL_USER_PROFILE = "DETAIL_USER_PROFILE";
 export const UPDATE_USER = "UPDATE_USER";
 
+
 export const detailUser = (userDetail) => {
   console.log("Dispatching user:", userDetail);
   return {
@@ -15,3 +16,5 @@ export const updateUser = (user) => {
     payload: user,
   };
 };
+
+

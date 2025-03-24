@@ -1,7 +1,6 @@
 export const getDetailsUser = async (_id) => {
   const token = localStorage.getItem("token");
-  console.log("Token:", token); // Verifica que el token sea correcto y esté disponible
-
+ 
   const response = await fetch(`http://localhost:3000/api/users/${_id}`, {
     method: "GET",
     headers: {
@@ -23,15 +22,11 @@ export const loginUser = async (email, password) => {
 
   if (res.ok) {
     const { token, user } = result;
-
     localStorage.removeItem("token");
-
     localStorage.setItem("token", token);
-    console.log(token);
 
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
-      console.log(user);
     }
   }
   return result;
@@ -58,9 +53,7 @@ export const registerNewUser = async (loginData) => {
 
 export const editUser = async (_id, updateUser) => {
   const token = localStorage.getItem("token");
-  console.log("Token:", token);
   if (!token) {
-    console.log("No token found, user might not be logged in");
     return { error: "Unauthorized" };
   }
 

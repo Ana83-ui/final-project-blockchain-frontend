@@ -44,10 +44,12 @@ export const addNewTransaction = async (transaction) => {
   const res = await fetch("http://localhost:3000/api/transactions", {
     method: "POST",
     headers: {
-      "content-type": "application/json",
+      "Content-type": "application/json",
     },
     body: JSON.stringify(transaction),
   });
   const result = await res.json();
   return result;
 };
+
+

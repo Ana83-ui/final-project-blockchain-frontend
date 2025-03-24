@@ -11,8 +11,7 @@ export const newTransactionComponentReducer = ( state = initialState, action) =>
         ...state,
         transaction: [...state.transaction, action.payload],
       };
-
-    default:
+      default:
       return state;
   }
 };

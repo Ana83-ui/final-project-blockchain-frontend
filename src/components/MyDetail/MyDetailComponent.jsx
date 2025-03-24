@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserById, editUser, getDetailsUser } from "../../core/services/fetchUser";
+import { deleteUserById, editUser } from "../../core/services/fetchUser";
 import { loadDetail, updateUser } from "./MyDetailComponentAction";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";

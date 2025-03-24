@@ -5,9 +5,8 @@ import { detailUser } from "./MyProfileComponentAction";
 import TransactionPage from "../../pages/TransactionPage/TransactionPage";
 
 const MyProfileComponent = () => {
-  const userDetail = useSelector(
-    (state) => state.myProfileComponentReducer.userDetail
-  );
+  const userDetail = useSelector((state) => state.myProfileComponentReducer.userDetail);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,13 +15,19 @@ const MyProfileComponent = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (token && user) {
       dispatch(detailUser(user));
+     
     } else {
       console.log("No user or token found in localStorage");
     }
   }, [dispatch]);
 
   useEffect(() => {
+    if(userDetail){
+      console.log("User details updated:", userDetail);
+    }
   }, [userDetail]); 
+
+
 
   const goToDetailUser = () => {
     navigate("/details");

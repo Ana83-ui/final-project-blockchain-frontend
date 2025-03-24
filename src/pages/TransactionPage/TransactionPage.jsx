@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTransactionByUser } from "./TransactionPageAction";
 import { getTransactionById } from "../../core/services/fetchTransaction";
 import { useNavigate } from "react-router";
+import { detailUser } from "../../components/MyProfile/MyProfileComponentAction";
+
 
 const TransactionPage = () => {
   const { transactions } = useSelector((state) => state.transactionPageReducer);
-  
+ 
   const dispatch = useDispatch();
   let navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false); 
+  
   const transactionsAll = async () => {
     const result = await getTransactionById();
     if (result && result.length > 0) {
@@ -44,14 +47,14 @@ const TransactionPage = () => {
     return `${day}/${month}/${year}`;
   };
 
+
   return (
     <div className="container-transaction">
       <h1 className="title-transaction">My transactions history</h1>
+      {loading && <p>Loading...</p>}
       {transactions && transactions.length > 0 ? (
         transactions.map((t, idx) => {  
-
         const receiverEmail = t.receiver?.email || "Unknown receiver";
-        
           return (
             <div key={idx} className="transaction-card, div-with-line">
               <div>
@@ -65,9 +68,7 @@ const TransactionPage = () => {
                 <span>Amount: </span>
                 <span>{t.amount} €</span>
               </div>
-
               <button onClick={() => {goToDetailTransaction(t);}} className="btn-go" >+ Info</button>
-       
             </div>
           );
         })

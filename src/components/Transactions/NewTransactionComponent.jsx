@@ -1,16 +1,20 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { addNewTransaction } from "../../core/services/fetchTransaction";
+import { addNewTransaction } from "../../core/services/fetchTransaction"; // Llamada al servicio para añadir transacción
 import { addItemTransaction } from "./NewTransactionComponentAction";
 import { useState } from "react";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import coinhako from "../../assets/coinhako.jpg";
+import { updateUserBalance } from '../MyProfile/MyProfileComponentAction';
+import { getUserBalance } from "../../core/services/fetchTransaction";
 
 
 const NewTransactionComponent = () => {
-
-   const dispatch = useDispatch();
+  const userDetail = useSelector((state)=>state.myProfileComponentReducer.userDetail)
+  const dispatch = useDispatch();
   let navigate = useNavigate();
+
+  const [balance, setBalance] = useState()
 
   const backToUserProfile = () => {
     navigate("/profile");
@@ -27,30 +31,46 @@ const NewTransactionComponent = () => {
     setNewTransaction(createNewTransaction);
   };
 
+  const handleTransactionUpdate = async () => {
+    if (userDetail) {
+          const updatedBalance = await getUserBalance(userDetail._id);
+      setBalance(updatedBalance); 
+      dispatch(updateUserBalance(updatedBalance));  
+    }
+  };
+
+
   const addTransaction = async () => {
-    if ( !newTransaction.sender || !newTransaction.receiver || !newTransaction.amount ) {
+    if (!newTransaction.sender || !newTransaction.receiver || !newTransaction.amount) {
       alert("All fields are required");
       return;
     }
+
     const transactionToAdd = {
       sender: newTransaction.sender,
       receiver: newTransaction.receiver,
-      amount: parseInt(newTransaction.amount),
+      amount: parseInt(newTransaction.amount),  
     };
+
     const response = await addNewTransaction(transactionToAdd);
+
     if (response && response.transaction) {
-       dispatch(addItemTransaction(newTransaction));
-       setNewTransaction({
+      dispatch(updateUserBalance(response.senderBalance));
+      handleTransactionUpdate()
+      dispatch(addItemTransaction(response.transaction));
+
+
+      setNewTransaction({
         sender: "",
         receiver: "",
         amount: "",
       });
-     
 
-      alert("Transaction send");
+      alert("Transaction sent successfully!");
       navigate("/profile");
     } else {
       console.log("Error sending the transaction");
+      alert("Transaction failed. Please try again.");
     }
   };
 
@@ -61,15 +81,33 @@ const NewTransactionComponent = () => {
         <div className="input-form">
           <div>
             <span className="sender">Sender: </span>
-            <input type="text" placeholder="Enter your email address"  value={newTransaction.sender} name="sender" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+            <input
+              type="text"
+              placeholder="Enter your email address"
+              value={newTransaction.sender}
+              name="sender"
+              onChange={(e) => inputHandler(e.target.name, e.target.value)}
+            />
           </div>
           <div>
             <span className="receiver">Receiver: </span>
-            <input type="text" placeholder="Enter the recipient’s email" value={newTransaction.receiver} name="receiver" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+            <input
+              type="text"
+              placeholder="Enter the recipient’s email"
+              value={newTransaction.receiver}
+              name="receiver"
+              onChange={(e) => inputHandler(e.target.name, e.target.value)}
+            />
           </div>
           <div>
             <span className="amount">Amount: </span>
-            <input type="text" placeholder="Amount to sent" value={newTransaction.amount} name="amount" onChange={(e) => inputHandler(e.target.name, e.target.value)}/>
+            <input
+              type="text"
+              placeholder="Amount to send"
+              value={newTransaction.amount}
+              name="amount"
+              onChange={(e) => inputHandler(e.target.name, e.target.value)}
+            />
           </div>
           <div className="btn-bis">
             <button onClick={addTransaction} className="btn-register">Send</button>

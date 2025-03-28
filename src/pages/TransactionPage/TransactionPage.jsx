@@ -3,16 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTransactionByUser } from "./TransactionPageAction";
 import { getTransactionById } from "../../core/services/fetchTransaction";
 import { useNavigate } from "react-router";
-import { detailUser } from "../../components/MyProfile/MyProfileComponentAction";
+import { addNewTransaction } from "../../core/services/fetchTransaction";
+import { updateUserBalance } from "../../components/MyProfile/MyProfileComponentAction";
 
-
-const TransactionPage = () => {
+const TransactionPage = ({onTransactionComplete}) => {
   const { transactions } = useSelector((state) => state.transactionPageReducer);
- 
+  const userDetail = useSelector((state) => state.myProfileComponentReducer.userDetail);  
+  
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [loading, setLoading] = useState(false); 
-  
+  const [amount, setAmount] = useState('');
+  const [receiverEmail, setReceiverEmail] = useState('');
+
   const transactionsAll = async () => {
     const result = await getTransactionById();
     if (result && result.length > 0) {
@@ -47,6 +50,33 @@ const TransactionPage = () => {
     return `${day}/${month}/${year}`;
   };
 
+  const handleTransaction = async () => {
+    if (!receiverEmail || !amount) {
+      alert("Please fill in both receiver email and amount");
+      return;
+    }
+  
+    const transaction = {
+      sender: userDetail._id, 
+      receiver: receiverEmail, 
+      amount: amount, 
+    };
+  
+    const result = await addNewTransaction(transaction);
+  
+    if (result.status === "Success") {
+      alert("Transaction completed successfully!");
+  
+           const updatedBalance = await getUserBalance(userDetail._id); 
+  
+      dispatch(updateUserBalance(updatedBalance));  
+  
+      transactionsAll();
+    } else {
+      alert("Transaction failed!");
+    }
+  };
+  
 
   return (
     <div className="container-transaction">

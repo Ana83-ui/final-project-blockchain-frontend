@@ -1,7 +1,9 @@
-import { DETAIL_USER, UPDATE_USER } from "././MyDetailComponentAction";
+import { DETAIL_USER, UPDATE_USER, UPDATE_BALANCE} from "./MyDetailComponentAction";
 
 const initialState = {
-  userDetail: null,
+  userDetail: {},
+   
+
 };
 
 export const myDetailComponentReducer = (state = initialState, action) => {
@@ -15,6 +17,14 @@ export const myDetailComponentReducer = (state = initialState, action) => {
       return {
         ...state,
         userDetail: action.payload,
+      };
+      case UPDATE_BALANCE:
+      return {
+        ...state,
+        userDetail: {
+          ...state.userDetail,
+          balance: action.payload,  
+        },
       };
     default:
       return state;

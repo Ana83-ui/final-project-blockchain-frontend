@@ -1,4 +1,4 @@
-import {  DETAIL_USER_PROFILE,  UPDATE_USER } from "./MyProfileComponentAction";
+import {  DETAIL_USER_PROFILE,  UPDATE_USER, UPDATE_BALANCE} from "./MyProfileComponentAction";
 
 const initialState = {
   userDetail: {},
@@ -16,7 +16,14 @@ export const myProfileComponentReducer = (state = initialState, action) => {
         ...state,
         userDetail: action.payload,
       };
-
+      case UPDATE_BALANCE:
+        return {
+          ...state,
+          userDetail: {
+            ...state.userDetail,
+            balance: action.payload,
+          },
+        }; 
     default:
       return state;
   }

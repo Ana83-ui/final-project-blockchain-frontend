@@ -9,8 +9,8 @@ import lachlan from "../../assets/lachlan.jpg"
 
 
 const MyDetailComponent = () => {
- const userDetail = useSelector((state) => state.myDetailComponentReducer.userDetail);
-
+ const userDetail = useSelector((state) => state.myProfileComponentReducer.userDetail);
+const [balance, setBalance] = useState()
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
@@ -46,6 +46,15 @@ const MyDetailComponent = () => {
     }
   }, [userDetail]);
 
+  useEffect(() => {
+    if(userDetail){
+      console.log("Updated user balance:", userDetail.balance);
+    setBalance(userDetail.balance)
+    }
+  }, [userDetail.balance]); 
+
+
+
   const editUserById = async (_id) => {
     try {
       const updatedUser = {
@@ -80,10 +89,14 @@ const MyDetailComponent = () => {
     }
  }
 
+
+
   const inputHandler = (nameProp, valueProp) => {
     const updatedUser = { ...newUser, [nameProp]: valueProp };
     setNewUser(updatedUser);
+    
   };
+
 
   return (
     <div className="container-personal">

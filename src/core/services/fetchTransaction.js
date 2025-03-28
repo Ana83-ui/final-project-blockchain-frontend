@@ -49,7 +49,16 @@ export const addNewTransaction = async (transaction) => {
     body: JSON.stringify(transaction),
   });
   const result = await res.json();
-  return result;
+    return result;
 };
+
+export const getUserBalance = async (userId) =>{
+  const res = await fetch(`http://localhost:3000/api/balance/${userId}`)
+  if(!res.ok){
+    throw new Error ("Error al obtener el balance")
+  }
+  const response = await res.json()
+  return response.balance
+}
 
 

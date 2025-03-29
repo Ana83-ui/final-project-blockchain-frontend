@@ -25,7 +25,8 @@ const HomeLayout = ({ children }) => {
             <img onClick={goToHome} src={logo} alt=" logo of company" className="logo of the company"/>
             <h1 onClick={goToHome} className="title-header"> TransactFlow </h1>
           </div>
-          <p onClick={goToForm} className="sign"> Sign In</p>
+          <p onClick={goToForm} className="sign">Sign In</p>
+      
         </div>
       </div>
       

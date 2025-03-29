@@ -95,7 +95,7 @@ body {
   width: 118.75rem; 
   margin: 0 9.375rem; 
 }
-/*finish stylehome*/
+/*finish style home*/
 
 /* Media Queries header*/
 @media (max-width: 1200px) {
@@ -293,6 +293,33 @@ body {
     cursor: pointer;
   }
 }
+
+/* screeb 1024px */
+@media (max-width: 1024px) {
+  .btn-go {
+    margin-inline-start: 90px; 
+    padding: 12px 25px; 
+  }
+}
+
+/* screen  768px */
+@media (max-width: 768px) {
+  .btn-go {
+    margin-inline-start: 60px;
+    padding: 10px 20px; 
+  }
+}
+
+/* screen 600px */
+@media (max-width: 600px) {
+  .btn-go {
+    margin-inline-start: 30px; 
+    padding: 8px 15px; 
+    width: 70px;
+    margin-top: 15px;
+  }
+}
+
 
 /* - register & password change*/
 .register {
@@ -586,6 +613,306 @@ body {
 }
 /* finish transaction profile*/
 
+/*Media Queries*/ 
+@media (max-width: 1024px) {
+  .welcome-profile {
+    margin: 0 5rem;
+    margin-top: 3rem;
+  }
+
+  .balance {
+    margin: 0 5rem;
+    gap: 2rem;
+  }
+
+  .container-transaction {
+    margin: 0 5rem;
+    margin-bottom: 3rem;
+  }
+}
+
+
+/* start styles profile*/
+.container-profile{
+  min-height: 47.875rem; 
+}
+
+.welcome-profile {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 9.375rem; 
+  margin-top: 4.375rem; 
+}
+
+.photo {
+  display: flex;
+  gap: 1.875rem; 
+}
+
+.welcome-title {
+  margin-top: 1.875rem; 
+}
+
+.balance {
+  margin: 0 9.375rem; 
+  display: flex;
+  gap: 3.125rem; 
+  margin-top: 1.875rem; 
+}
+
+.title-balance {
+  margin-top: 1.625rem; 
+}
+
+/* style transaction profile*/
+.container-transaction {
+  margin: 0 9.375rem; 
+  min-height: 24.375rem; 
+  margin-bottom: 4.375rem;
+}
+
+.title-transaction {
+  margin-bottom: 3.125rem; 
+}
+
+.transaction-card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.875rem; /* 30px */
+}
+
+
+.div-with-line {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.875rem; /* 30px */
+}
+
+.div-with-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.3125rem; /* -5px */
+  width: 100%;
+  height: 0.125rem; /* 2px */
+  background-color: #000;
+}
+
+
+
+/* finish transaction profile*/
+
+/* start styles profile*/
+.container-profile {
+  min-height: 47.875rem;
+}
+
+.welcome-profile {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 9.375rem;
+  margin-top: 4.375rem;
+}
+
+.photo {
+  display: flex;
+  gap: 1.875rem;
+}
+
+.welcome-title {
+  margin-top: 1.875rem;
+}
+
+.balance {
+  margin: 0 9.375rem;
+  display: flex;
+  gap: 3.125rem;
+  margin-top: 1.875rem;
+}
+
+.title-balance {
+  margin-top: 1.625rem;
+}
+
+/* style transaction profile*/
+.container-transaction {
+  margin: 0 9.375rem;
+  min-height: 24.375rem;
+  margin-bottom: 4.375rem;
+}
+
+.title-transaction {
+  margin-bottom: 3.125rem;
+}
+
+.transaction-card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.875rem; /* 30px */
+}
+
+.div-with-line {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.875rem; /* 30px */
+}
+
+.div-with-line::after {
+  content: "";
+  position: relative
+}
+
+/* start styles profile*/
+.container-profile {
+  min-height: 47.875rem,
+}
+
+.welcome-profile {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 9.375rem;
+  margin-top: 4.375rem;
+}
+
+.photo {
+  display: flex;
+  gap: 1.875rem;
+}
+
+.welcome-title {
+  margin-top: 1.875rem;
+}
+
+.balance {
+  margin: 0 9.375rem;
+  display: flex;
+  gap: 3.125rem;
+  margin-top: 1.875rem;
+}
+
+.title-balance {
+  margin-top: 1.625rem;
+}
+
+/* style transaction profile*/
+.container-transaction {
+  margin: 0 9.375rem;
+  min-height: 24.375rem;
+  margin-bottom: 4.375rem;
+}
+
+.title-transaction {
+  margin-bottom: 3.125rem;
+}
+
+.transaction-card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.875rem; /* 30px */
+}
+
+.div-with-line {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.875rem; /* 30px */
+}
+
+.div-with-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.3125rem; 
+ width: 100%; 
+  height: 0.125rem; 
+ background-color: #000;
+} 
+
+/* Media Queries */
+
+/*  screens 1024px  */
+@media (max-width: 1024px) {
+  .welcome-profile {
+    margin: 0 5rem;
+    margin-top: 3rem;
+  }
+
+  .balance {
+    margin: 0 5rem;
+    gap: 2rem;
+  }
+
+  .container-transaction {
+    margin: 0 5rem;
+    margin-bottom: 3rem;
+  }
+}
+
+/*  screens 768px  */
+@media (max-width: 768px) {
+  .welcome-profile {
+    flex-direction: column;
+    margin: 0 3rem;
+    margin-top: 2rem;
+  }
+
+  .photo {
+    gap: 1.5rem;
+  }
+
+  .balance {
+    flex-direction: column;
+    margin: 0 3rem;
+    gap: 1.5rem;
+  }
+
+  .transaction-card {
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .container-transaction {
+    margin: 0 3rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* screens 600px */
+@media (max-width: 600px) {
+  .welcome-profile {
+    margin: 0 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .photo {
+    gap: 1rem;
+  }
+
+  .balance {
+    margin: 0 1.5rem;
+    gap: 1rem;
+  }
+
+  .transaction-card {
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .container-transaction {
+    margin: 0 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .div-with-line {
+    flex-direction: column;
+  }
+}
+
 
 /* start style new transaction*/
 .new-transaction {
@@ -599,6 +926,51 @@ body {
   border-radius: 1%;
 }
 /* finish style new transaction*/
+
+
+/* Media Queries */
+
+/* screen 1024px */
+@media (max-width: 1024px) {
+  .new-transaction {
+    margin-inline-start: 8rem;
+    margin-top: -6rem;
+  }
+
+  .img-new-transaction {
+    width: 32rem;
+    margin-inline-start: 6rem;
+  }
+}
+
+/* screen 768px */
+@media (max-width: 768px) {
+  .new-transaction {
+    margin-inline-start: 4rem;
+    margin-top: -4rem;
+  }
+
+  .img-new-transaction {
+    width: 24rem;
+    margin-inline-start: 4rem;
+  }
+}
+
+/* screen 600px */
+@media (max-width: 600px) {
+  .new-transaction {
+    margin-inline-start: 2rem;
+    margin-top: -2rem;
+  }
+
+  .img-new-transaction {
+    width: 20rem;
+    margin-inline-start: 2rem;
+  }
+}
+
+
+
 
 /* start style contact*/
 .container-contact {
@@ -621,64 +993,69 @@ body {
   z-index: 10; 
 }
 
-.contact-info{
-  margin: -100px 0px 0px -300px;
-  width: 900px;
-
+.contact-info {
+  margin: -6.25rem 0 0 -18.75rem; 
+  width: 56.25rem; 
 }
 
-.title-contact{
-  font-size: 80px;
+.title-contact {
+  font-size: 5rem; 
 }
 
-.p-contact{
-  font-size: 35px;
+.p-contact {
+  font-size: 2.1875rem; 
 }
+
 /* finish style contact*/
 
 /* Media Queries Contact */
+/* screen 1024px */
 @media (max-width: 1024px) {
+  .contact-info {
+    margin: -5rem 0 0 -15rem; 
+    width: 46.875rem; 
+  }
+
   .title-contact {
-    font-size: 60px;  
+    font-size: 4.5rem; 
   }
 
   .p-contact {
-    font-size: 28px;  
-  }
-
-  .contact-info {
-    margin: -80px 0px 0px -250px;  
-    width: 750px;
+    font-size: 2rem; 
   }
 }
 
+/* screen 768px */
 @media (max-width: 768px) {
+  .contact-info {
+    margin: -3.75rem 0 0 -12rem; 
+    width: 37.5rem; 
+  }
+
   .title-contact {
-    font-size: 50px;  
+    font-size: 3.5rem; 
   }
 
   .p-contact {
-    font-size: 24px;  
-  }
-
-  .contact-info {
-    margin: -60px 0px 0px -200px;  
-    width: 600px;
+    font-size: 1.875rem; 
   }
 }
 
+/* screen 600px */
 @media (max-width: 600px) {
+  .contact-info {
+    margin: -2.25rem 0 0 -3.375rem; 
+    width: 31.25rem; 
+  }
+
   .title-contact {
-    font-size: 40px;  
+    font-size: 2rem; 
+    margin-inline-start: 6.875rem;
   }
 
   .p-contact {
-    font-size: 20px; 
-  }
-
-  .contact-info {
-    margin: -50px 0px 0px -150px; 
-    width: 100%;
+    font-size: 1rem; 
+    margin-inline-start: 6.875rem;
   }
 }
 
@@ -753,7 +1130,7 @@ body {
 @media (max-width: 600px) {
   .footer {
     flex-direction: column; 
-    align-items: center; 
+    align-items: start;
     margin: 0 1rem; 
   }
 

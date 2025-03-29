@@ -8,7 +8,6 @@ import coinhako from "../../assets/coinhako.jpg";
 import { updateUserBalance } from '../MyProfile/MyProfileComponentAction';
 import { getUserBalance } from "../../core/services/fetchTransaction";
 
-
 const NewTransactionComponent = () => {
   const userDetail = useSelector((state)=>state.myProfileComponentReducer.userDetail)
   const dispatch = useDispatch();
@@ -45,8 +44,8 @@ const NewTransactionComponent = () => {
       alert("All fields are required");
       return;
     }
-
-    const transactionToAdd = {
+  
+       const transactionToAdd = {
       sender: newTransaction.sender,
       receiver: newTransaction.receiver,
       amount: parseInt(newTransaction.amount),  
@@ -70,7 +69,7 @@ const NewTransactionComponent = () => {
       navigate("/profile");
     } else {
       console.log("Error sending the transaction");
-      alert("Transaction failed. Please try again.");
+      alert("Transaction failed. Please check that all fields are correct.");
     }
   };
 

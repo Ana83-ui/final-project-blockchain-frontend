@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { addNewTransaction } from "../../core/services/fetchTransaction";
 import { updateUserBalance } from "../../components/MyProfile/MyProfileComponentAction";
 
+
 const TransactionPage = ({onTransactionComplete}) => {
   const { transactions } = useSelector((state) => state.transactionPageReducer);
   const userDetail = useSelector((state) => state.myProfileComponentReducer.userDetail);  
@@ -92,7 +93,8 @@ const TransactionPage = ({onTransactionComplete}) => {
                 <span>{formatDate(t.timestamp)}</span>
               </div>
               <div>
-                <span>{receiverEmail}</span>
+                <span>To: </span>
+              <span>{receiverEmail}</span>
               </div>
               <div>
                 <span>Amount: </span>

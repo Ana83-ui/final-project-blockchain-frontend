@@ -10,6 +10,12 @@ const LoginPage = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
+
+
+
+
+
+
   const inputHandler = (nameProp, valueProp) => {
     dispatch(updateLoginUser(nameProp, valueProp));
   };
